@@ -20,7 +20,12 @@ defmodule BananaBankWeb.ErrorJSON do
   end
 
   def error(%{status: :not_found}) do
-    %{status: :not_found, message: "USER Not Found"}
+    %{status: :not_found, message: "Resource Not Found"}
+  end
+
+  def error(%{status: status}) do
+    IO.inspect("TESTEEEEE")
+    %{status: status}
   end
 
   def error(%{changeset: changeset}) do
