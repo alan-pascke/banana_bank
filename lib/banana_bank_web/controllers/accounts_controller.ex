@@ -7,20 +7,29 @@ defmodule BananaBankWeb.AccountsController do
   action_fallback BananaBankWeb.FallBackController
 
   def create(conn, params) do
-    with {:ok, %Account{} = account} <- Accounts.create(params)  do
+    with {:ok, %Account{} = account} <- Accounts.create(params) do
       conn
       |> put_status(:created)
       |> render(:create, account: account)
     end
   end
 
-  # def show(conn, %{"id" => id}) do
-  #   with {:ok, %Account{} = account} <- Accounts.get(id) do
-  #     conn
-  #     |> put_status(:ok)
-  #     |> render(:get, account: account)
-  #   end
-  # end
+  def show(conn, %{"id" => id}) do
+    with {:ok, %Account{} = account} <- Accounts.get(id) do
+      conn
+      |> put_status(:ok)
+      |> render(:get, account: account)
+    end
+  end
+
+  def transaction(conn, params) do
+    with {:ok, result} <- Accounts.transaction(params) do
+      conn
+      |> put_status(:ok)
+      |> render(:transaction, transaction: result)
+    end
+  end
+
 
   # def update(conn, params) do
   #   with {:ok, %Account{} = account} <- Accounts.update(params) do

@@ -11,7 +11,8 @@ defmodule BananaBankWeb.Router do
     get "/", WelcomeController, :index
     resources "/users" , UsersController, only: [:create, :update, :delete, :show]
 
-    post "/accounts", AccountsController, :create
+    resources "/accounts", AccountsController, only: [:create, :show]
+    post "/accounts/transaction", AccountsController, :transaction
 
   end
 
